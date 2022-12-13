@@ -1,14 +1,25 @@
 import Head from 'next/head';
-import Image from 'next/image';
 import styled from 'styled-components';
 
 const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 
   min-height: 90vh;
+  max-width: 1200px;
   padding: 20px;
+  margin: 0 auto;
+`;
+
+const Main = styled.main`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  gap: 20px;
 `;
 
 export default function Home() {
@@ -17,7 +28,7 @@ export default function Home() {
       <Head>
         <title>Feed</title>
       </Head>
-      <main>
+      <Main>
         <h1>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
@@ -53,20 +64,7 @@ export default function Home() {
             </p>
           </a>
         </div>
-      </main>
-
-      <footer>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
+      </Main>
     </Container>
   );
 }

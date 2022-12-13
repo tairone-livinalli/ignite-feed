@@ -2,6 +2,7 @@ import type { AppProps } from 'next/app';
 import { Roboto_Slab } from '@next/font/google';
 import Head from 'next/head';
 import Navbar from '../components/navbar/navbarComponent';
+import Footer from '../components/footer/footerComponent';
 
 const robotoSlab = Roboto_Slab({ subsets: ['latin'] });
 
@@ -52,6 +53,7 @@ export default function App({ Component, pageProps }: AppProps) {
       </Head>
       <Navbar />
       <Component {...pageProps} />
+      <Footer />
     </>
   );
 }
