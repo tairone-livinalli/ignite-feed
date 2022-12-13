@@ -1,10 +1,9 @@
-import '../styles/globals.ts';
 import type { AppProps } from 'next/app';
 import { Roboto_Slab } from '@next/font/google';
 import Head from 'next/head';
 import Navbar from '../components/navbar/navbarComponent';
 
-const robotoSlab = Roboto_Slab();
+const robotoSlab = Roboto_Slab({ subsets: ['latin'] });
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
