@@ -83,10 +83,8 @@ const BottomNavbar = () => {
 
       if (!container) return;
 
-      const heightDiff = window.innerHeight - windowHeight;
-      const newBottomPosition = heightDiff > 0 ? 20 : 0;
+      const newBottomPosition = window.innerHeight - windowHeight > 0 ? 20 : 0;
 
-      container.style.paddingBottom = heightDiff + 'px';
       container.style.bottom = newBottomPosition + 'px';
     };
 
