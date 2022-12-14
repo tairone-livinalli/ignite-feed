@@ -4,10 +4,31 @@ import Head from 'next/head';
 import Navbar from '../components/navbar/navbarComponent';
 import Footer from '../components/footer/footerComponent';
 import BottomNavbar from '../components/navbar/bottomNavbarComponent';
+import { useEffect } from 'react';
 
 const robotoSlab = Roboto_Slab({ subsets: ['latin'] });
 
 export default function App({ Component, pageProps }: AppProps) {
+  useEffect(() => {
+    const resizer = () => {
+      const app = document.getElementById('__next');
+
+      if (!app) return;
+
+      app.style.height = window.innerHeight + 'px';
+    };
+
+    window.addEventListener('resize', (_e) => resizer());
+
+    document.addEventListener('DOMContentLoaded', (_e) => resizer());
+
+    return () => {
+      window.removeEventListener('resize', (_e) => resizer());
+
+      document.removeEventListener('DOMContentLoaded', (_e) => resizer());
+    };
+  });
+
   return (
     <>
       <style jsx global>{`

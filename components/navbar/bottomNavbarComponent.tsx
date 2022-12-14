@@ -25,6 +25,7 @@ const BottomNavigation = styled.div`
   justify-content: space-around;
   z-index: 10;
   padding: 6px 0;
+  height: 8vh;
 
   background-color: #121214;
 `;
@@ -79,13 +80,17 @@ const BottomNavbar = () => {
           onClick={() => handleClickNavigate(homeRoute)}
           isActive={isHomeActive}
         >
-          {isHomeActive ? <IoHome /> : <IoHomeOutline />}
+          {isHomeActive ? <IoHome size={24} /> : <IoHomeOutline size={24} />}
         </NavigationButton>
         <NavigationButton
           onClick={() => handleClickNavigate(messagesRoute)}
           isActive={isMessagesActive}
         >
-          {isMessagesActive ? <IoChatbox /> : <IoChatboxOutline />}
+          {isMessagesActive ? (
+            <IoChatbox size={24} />
+          ) : (
+            <IoChatboxOutline size={24} />
+          )}
         </NavigationButton>
         <NavigationButton
           onClick={() => handleClickNavigate(profileRoute)}
@@ -98,8 +103,8 @@ const BottomNavbar = () => {
             }}
             src="https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2787&q=80"
             alt="User avatar"
-            width={20}
-            height={20}
+            width={28}
+            height={28}
           />
         </NavigationButton>
       </BottomNavigation>
