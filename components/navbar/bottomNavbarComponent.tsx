@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import {
@@ -48,6 +48,7 @@ const NavigationButton = styled.button<NavigationButtonProps>`
 `;
 
 const BottomNavbar = () => {
+  const [windowHeight] = useState(() => window.innerHeight);
   const router = useRouter();
   const [homeRoute] = useState('/');
   const [messagesRoute] = useState('/messages');
@@ -73,9 +74,32 @@ const BottomNavbar = () => {
     [router, profileRoute],
   );
 
+  useEffect(() => {
+    const resizer = () => {
+      const container = document.getElementById('bottom-navigation');
+
+      if (!container) return;
+
+      const paddingBottom = window.innerHeight > windowHeight ? 20 : 0;
+
+      container.style.paddingBottom = paddingBottom + 'px';
+      container.style.bottom = paddingBottom + 'px';
+    };
+
+    window.addEventListener('resize', (_e) => resizer());
+
+    document.addEventListener('DOMContentLoaded', (_e) => resizer());
+
+    return () => {
+      window.removeEventListener('resize', (_e) => resizer());
+
+      document.removeEventListener('DOMContentLoaded', (_e) => resizer());
+    };
+  });
+
   return (
     <MobileContainer>
-      <BottomNavigation>
+      <BottomNavigation id="bottom-navigation">
         <NavigationButton
           onClick={() => handleClickNavigate(homeRoute)}
           isActive={isHomeActive}
