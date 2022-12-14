@@ -48,7 +48,7 @@ const NavigationButton = styled.button<NavigationButtonProps>`
 `;
 
 const BottomNavbar = () => {
-  const [windowHeight] = useState(() => window.innerHeight);
+  const [windowHeight, setWindowHeight] = useState(0);
   const router = useRouter();
   const [homeRoute] = useState('/');
   const [messagesRoute] = useState('/messages');
@@ -75,6 +75,8 @@ const BottomNavbar = () => {
   );
 
   useEffect(() => {
+    setWindowHeight(window.innerHeight);
+
     const resizer = () => {
       const container = document.getElementById('bottom-navigation');
 
