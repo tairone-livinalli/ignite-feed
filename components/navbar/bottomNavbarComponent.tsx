@@ -75,18 +75,18 @@ const BottomNavbar = () => {
   );
 
   useEffect(() => {
-    setWindowHeight(window.innerHeight);
-
     const resizer = () => {
       const container = document.getElementById('bottom-navigation');
 
       if (!container) return;
 
-      const paddingBottom = window.innerHeight > windowHeight ? 20 : 0;
+      const newBottomPosition = window.innerHeight > windowHeight ? 20 : 0;
 
-      container.style.paddingBottom = paddingBottom + 'px';
-      container.style.bottom = paddingBottom + 'px';
+      container.style.paddingBottom = '200px';
+      container.style.bottom = newBottomPosition + 'px';
     };
+
+    setWindowHeight(window.innerHeight);
 
     window.addEventListener('resize', (_e) => resizer());
 
