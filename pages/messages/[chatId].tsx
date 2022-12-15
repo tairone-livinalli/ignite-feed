@@ -114,13 +114,7 @@ const Chat = () => {
   const chatTopRef = useRef<HTMLDivElement>(null);
   const chatBottomRef = useRef<HTMLDivElement>(null);
   const paginationObserver = useRef<IntersectionObserver>(
-    new IntersectionObserver((entries) => {
-      for (let entry of entries) {
-        if (entry.intersectionRatio > 0) {
-          console.log("Chat's top");
-        }
-      }
-    }),
+    {} as IntersectionObserver,
   );
 
   useEffect(() => {
@@ -129,6 +123,14 @@ const Chat = () => {
 
   useEffect(() => {
     if (!chatTopRef.current) return;
+
+    paginationObserver.current = new IntersectionObserver((entries) => {
+      for (let entry of entries) {
+        if (entry.intersectionRatio > 0) {
+          console.log("Chat's top");
+        }
+      }
+    });
 
     const localObserver = paginationObserver.current;
     const localChatTop = chatTopRef.current;
