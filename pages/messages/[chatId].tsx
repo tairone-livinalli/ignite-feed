@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { IoSend } from 'react-icons/io5';
 import styled from 'styled-components';
 
@@ -30,6 +30,7 @@ const Messages = styled.div`
   gap: 10px;
 `;
 
+const ChatTop = styled.div``;
 interface MessageProps {
   isOwner?: boolean;
 }
@@ -52,6 +53,8 @@ const MessageContent = styled.p`
   font-size: 16px;
   color: #e1e1e6;
 `;
+
+const ChatBottom = styled.div``;
 
 const Actions = styled.div`
   display: flex;
@@ -108,9 +111,38 @@ const SendMessageButton = styled.button`
 `;
 
 const Chat = () => {
+  const chatTopRef = useRef<HTMLDivElement>(null);
+  const chatBottomRef = useRef<HTMLDivElement>(null);
+  const paginationObserver = useRef<IntersectionObserver>(
+    new IntersectionObserver((entries) => {
+      for (let entry of entries) {
+        if (entry.intersectionRatio > 0) {
+          console.log("Chat's top");
+        }
+      }
+    }),
+  );
+
+  useEffect(() => {
+    chatBottomRef?.current?.scrollIntoView({ behavior: 'auto' });
+  }, []);
+
+  useEffect(() => {
+    if (!chatTopRef.current) return;
+
+    const localObserver = paginationObserver.current;
+    const localChatTop = chatTopRef.current;
+    localObserver.observe(chatTopRef.current);
+
+    return () => {
+      localObserver.unobserve(localChatTop);
+    };
+  }, []);
+
   return (
     <Container>
       <Messages>
+        <ChatTop ref={chatTopRef} />
         <Message>
           <MessageContent>Lorem ipsum dolor sit amet,</MessageContent>
         </Message>
@@ -180,6 +212,7 @@ const Chat = () => {
         <Message isOwner>
           <MessageContent>Lorem ipsum dolor sit amet, c</MessageContent>
         </Message>
+        <ChatBottom ref={chatBottomRef} />
       </Messages>
       <Actions>
         <MessageInput type="text" />
