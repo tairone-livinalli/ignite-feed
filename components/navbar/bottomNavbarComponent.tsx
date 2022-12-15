@@ -1,4 +1,10 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import {
@@ -48,11 +54,13 @@ const NavigationButton = styled.button<NavigationButtonProps>`
 `;
 
 const BottomNavbar = () => {
-  const [windowHeight, setWindowHeight] = useState(0);
   const router = useRouter();
   const [homeRoute] = useState('/');
   const [messagesRoute] = useState('/messages');
   const [profileRoute] = useState('/profile');
+
+  const windowHeightRef = useRef(0);
+  const bottomNavigationRef = useRef<HTMLDivElement>(null);
 
   const handleClickNavigate = useCallback(
     (route: string) => {
@@ -74,34 +82,34 @@ const BottomNavbar = () => {
     [router, profileRoute],
   );
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
-    setWindowHeight(window.innerHeight);
+    windowHeightRef.current = window.innerHeight;
 
     const resizer = () => {
-      const container = document.getElementById('bottom-navigation');
+      const container = bottomNavigationRef.current;
 
       if (!container) return;
 
-      const newBottomPosition = window.innerHeight - windowHeight > 0 ? 20 : 0;
+      const newBottomPosition =
+        window.innerHeight - windowHeightRef.current > 0 ? 20 : 0;
 
-      container.style.bottom = newBottomPosition + 'px';
+      container.style.bottom = `${newBottomPosition}px`;
     };
 
-    window.addEventListener('resize', (_e) => resizer());
+    window.addEventListener('resize', () => resizer());
 
-    document.addEventListener('DOMContentLoaded', (_e) => resizer());
+    document.addEventListener('DOMContentLoaded', () => resizer());
 
     return () => {
-      window.removeEventListener('resize', (_e) => resizer());
+      window.removeEventListener('resize', () => resizer());
 
-      document.removeEventListener('DOMContentLoaded', (_e) => resizer());
+      document.removeEventListener('DOMContentLoaded', () => resizer());
     };
-  });
+  }, []);
 
   return (
     <MobileContainer>
-      <BottomNavigation id="bottom-navigation">
+      <BottomNavigation ref={bottomNavigationRef}>
         <NavigationButton
           onClick={() => handleClickNavigate(homeRoute)}
           isActive={isHomeActive}

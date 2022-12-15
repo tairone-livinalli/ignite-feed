@@ -117,8 +117,36 @@ const Chat = () => {
     {} as IntersectionObserver,
   );
 
+  const windowHeightRef = useRef(0);
+  const actionsRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     chatBottomRef?.current?.scrollIntoView({ behavior: 'auto' });
+  }, []);
+
+  useEffect(() => {
+    windowHeightRef.current = window.innerHeight;
+
+    const resizer = () => {
+      const container = actionsRef.current;
+
+      if (!container) return;
+
+      const newBottomPosition =
+        window.innerHeight - windowHeightRef.current > 0 ? 20 : 0;
+
+      container.style.bottom = `calc(8vh + ${newBottomPosition}px)`;
+    };
+
+    window.addEventListener('resize', () => resizer());
+
+    document.addEventListener('DOMContentLoaded', () => resizer());
+
+    return () => {
+      window.removeEventListener('resize', () => resizer());
+
+      document.removeEventListener('DOMContentLoaded', () => resizer());
+    };
   }, []);
 
   useEffect(() => {
@@ -216,7 +244,7 @@ const Chat = () => {
         </Message>
         <ChatBottom ref={chatBottomRef} />
       </Messages>
-      <Actions>
+      <Actions ref={actionsRef}>
         <MessageInput type="text" />
         <SendMessageButton>
           <IoSend />
