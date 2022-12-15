@@ -66,7 +66,7 @@ const BottomNavbar = () => {
     [router, homeRoute],
   );
   const isMessagesActive = useMemo(
-    () => router.asPath.endsWith(messagesRoute),
+    () => router.asPath.includes(messagesRoute),
     [router, messagesRoute],
   );
   const isProfileActive = useMemo(

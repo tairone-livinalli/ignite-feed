@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import styled from 'styled-components';
+import { useRouter } from 'next/router';
 
 const Container = styled.div`
   display: flex;
@@ -11,7 +12,7 @@ const Container = styled.div`
   max-width: 600px;
   padding: 20px;
   gap: 10px;
-  margin: 0 auto;
+  margin: 0 auto 8vh auto;
 
   @media (min-width: 1024px) {
     min-height: 90vh;
@@ -69,9 +70,15 @@ const ChatLastMessage = styled.p`
 `;
 
 const Messages = () => {
+  const router = useRouter();
+
+  const handleClickNavigateToChat = (id: string) => {
+    router.push(`${router.asPath}/${id}`);
+  };
+
   return (
     <Container>
-      <Chat>
+      <Chat onClick={() => handleClickNavigateToChat('sample-id')}>
         <ChatAvatar>
           <Image
             src={
@@ -88,7 +95,7 @@ const Messages = () => {
           <ChatLastMessage>Hey, how’s it goin?</ChatLastMessage>
         </ChatInfo>
       </Chat>
-      <Chat>
+      <Chat onClick={() => handleClickNavigateToChat('sample-id')}>
         <ChatAvatar>
           <Image
             src={
@@ -107,7 +114,7 @@ const Messages = () => {
           </ChatLastMessage>
         </ChatInfo>
       </Chat>
-      <Chat>
+      <Chat onClick={() => handleClickNavigateToChat('sample-id')}>
         <ChatAvatar>
           <Image
             src={
@@ -126,7 +133,7 @@ const Messages = () => {
           </ChatLastMessage>
         </ChatInfo>
       </Chat>
-      <Chat>
+      <Chat onClick={() => handleClickNavigateToChat('sample-id')}>
         <ChatAvatar>
           <Image
             src={

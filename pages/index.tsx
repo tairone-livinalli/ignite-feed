@@ -11,7 +11,7 @@ const Container = styled.div`
   min-height: 82vh;
   max-width: 600px;
   padding: 20px;
-  margin: 0 auto;
+  margin: 0 auto 8vh auto;
 
   @media (min-width: 1024px) {
     min-height: 90vh;

@@ -4,10 +4,13 @@ import styled from 'styled-components';
 const FooterContainer = styled.footer`
   width: 100vw;
   padding: 20px;
+  display: none;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @media screen and (min-width: 1024px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 `;
 
 const FooterText = styled.span`
