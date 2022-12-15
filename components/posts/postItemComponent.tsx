@@ -186,7 +186,7 @@ const PostItem: React.FC<PostItemProps> = ({
               alt={`${owner.name}'s avatar`}
               height={40}
               width={40}
-              style={{ borderRadius: '4px' }}
+              style={{ borderRadius: '4px', objectFit: 'cover' }}
             />
           </PostOwnerAvatar>
           <PostOwnerInfo>

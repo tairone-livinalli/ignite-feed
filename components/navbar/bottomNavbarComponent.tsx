@@ -125,9 +125,10 @@ const BottomNavbar = () => {
           <Image
             style={{
               borderRadius: '50%',
-              border: `${isProfileActive ? '2px solid #00b37e' : 'none'}`,
+              border: `${isProfileActive ? '1px solid #00b37e' : 'none'}`,
+              objectFit: 'cover',
             }}
-            src="https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2787&q=80"
+            src="https://images.unsplash.com/photo-1669993427100-221137cc7513?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=740&q=80"
             alt="User avatar"
             width={28}
             height={28}
