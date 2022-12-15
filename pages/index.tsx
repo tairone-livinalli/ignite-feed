@@ -8,10 +8,14 @@ const Container = styled.div`
   justify-content: center;
   flex-direction: column;
 
-  min-height: 90vh;
+  min-height: 82vh;
   max-width: 600px;
   padding: 20px;
   margin: 0 auto;
+
+  @media (min-width: 1024px) {
+    min-height: 90vh;
+  }
 `;
 
 const Main = styled.main`
